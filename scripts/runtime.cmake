@@ -1,0 +1,8 @@
+file(GLOB dlls "${source}/*.dll")
+foreach(dll IN LISTS dlls)
+    get_filename_component(name "${dll}" NAME)
+    if(name STREQUAL "torch_python.dll")
+        continue()
+    endif()
+    file(CREATE_LINK "${dll}" "${dest}/${name}" COPY_ON_ERROR)
+endforeach()
